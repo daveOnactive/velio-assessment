@@ -1,48 +1,198 @@
-# Velio group booking
+# Velio Group Booking
 
-A time-boxed prototype for limited-capacity activities, group plans, invites, and live availability.
+Velio is a group-booking prototype for limited-capacity activities. It includes a TypeScript API, a React web app for hosts and bookers, and a Flutter app for invited guests.
 
-## Repository layout
+## Prerequisites
 
-\`\`\`text
-backend/ Node.js + TypeScript API
-web/ React + Vite host and booker app
-mobile/ Flutter invited-guest app
-\`\`\`
+Install the following before running the project:
 
-## Quick start
+- [Node.js](https://nodejs.org/) 22 or later (includes npm)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) with Docker Compose enabled
+- [Flutter](https://docs.flutter.dev/get-started/install) with Dart SDK 3.3 or later — required only for the mobile app
 
-1. Install Node.js 22+, Docker Desktop, and Flutter 3.3+ for the mobile app.
-2. Copy \`.env.example\` to \`.env\`, then run \`docker compose up -d\`.
-3. Run \`npm.cmd install\`, \`npm.cmd --workspace @velio/api exec prisma generate\`, and \`npm.cmd run db:seed\`.
-4. Run \`npm.cmd run dev:api\` and \`npm.cmd run dev:web\`, then open \`http://localhost:5173\`.
-5. API documentation is at \`http://localhost:3001/docs\`; metrics are at \`http://localhost:3001/metrics\`.
-6. For mobile, run \`cd mobile && flutter pub get && flutter run --dart-define=API_URL=http://YOUR_LAN_IP:3001\`.
+The API uses PostgreSQL 16 and Redis 7. Docker Compose starts both services locally, so they do not need separate installations.
 
-Run \`npm.cmd run typecheck\`, \`npm.cmd run build\`, and \`npm.cmd test\` for Node checks. The concurrency test needs PostgreSQL running. If it is not running, the test is skipped rather than passed. Run \`flutter analyze && flutter test\` from \`mobile\` when Flutter is installed.
+## Project structure
 
-## Architecture and decisions
+```text
+backend/        Express API, Prisma schema, database schema, and tests
+web/            React + Vite web application
+mobile/         Flutter invited-guest application
+docker-compose.yml
+```
 
-PostgreSQL is the source of truth. Direct bookings and invite claims run in Prisma transactions that lock the activity row with \`SELECT ... FOR UPDATE\`, count committed bookings, and write the plan and booking together. This prevents overselling when people try to take the last spot at the same time.
+## Run the API and web app
 
-After a booking or claim commits, the API publishes the new availability through Redis Pub/Sub. Each API instance forwards it to the matching Socket.IO activity room. Web and mobile clients then refetch the activity; the real-time message never decides inventory.
+### 1. Configure the environment
 
-Invite claims are immutable attribution records. The database trigger rejects updates and deletes from \`invite_claims\`. A claim stores the invite, guest, booking, rail, and invite generation.
+Copy the example configuration at the repository root:
 
-## What is included and what is not
+```powershell
+Copy-Item .env.example .env
+```
 
-The prototype includes activity creation, direct booking, API support for vouch and public invites, invite claims, basic live availability, a web host/booker flow, a Flutter guest flow, cached mobile invite details, haptic claim feedback, and a metrics endpoint.
+The defaults work with the included Docker services:
 
-The web app creates public share codes only. There are no host-created invites, deep links, verified vouch delivery, transactional outbox, request idempotency keys, or true randomized holdout assignment. The database-free \`DEMO_MODE\` walkthrough is only for UI exploration. It is not transactional and must not be used to validate capacity safety or SLOs.
+```dotenv
+DATABASE_URL=postgresql://velio:velio@localhost:5432/velio
+REDIS_URL=redis://localhost:6379
+PORT=3001
+WEB_ORIGIN=http://localhost:5173
+NODE_ENV=development
+```
 
-## Tracking
+### 2. Start PostgreSQL and Redis
 
-\`/metrics\` shows the capacity invariant, raw booking attempt-to-success ratio, sold-out rejections, availability receipt p95, booker-to-inviter rate, raw invite-open-to-claim rate, and invite/claim counts by rail.
+```powershell
+docker compose up -d
+docker compose ps
+```
 
-The endpoint does not yet calculate a true K-factor by rail: its \`kFactorByRail\` field currently returns created-invite and claimed-invite counts. Invite opens are also raw events, not deduplicated human opens. Use the endpoint to inspect the prototype, not to make production experiment decisions.
+On its first start, PostgreSQL applies `backend/sql/001_schema.sql` automatically. This creates the application tables and types.
 
-## Plan versus reality and trade-offs
+### 3. Install dependencies and generate Prisma Client
 
-\`PLANS.md\` documents the intended product, technical, and tracking approach, then separates it from the smaller working prototype. \`OWNERSHIP.md\` shows how the team should investigate the supplied conversion problem before changing the product.
+Run these commands from the repository root:
 
-In the 48-hour scope, the priority was correct capacity allocation and durable invite attribution. Payments, authentication, contact delivery, abuse protection, transactional outbox retries, deep-link infrastructure, and production experimentation are future work.
+```powershell
+npm.cmd install
+npm.cmd --workspace @velio/api exec prisma generate
+```
+
+### 4. Seed demo data
+
+```powershell
+npm.cmd run db:seed
+```
+
+This clears Velio application data and creates demo users plus two activities. The command prints their IDs for use with the API.
+
+### 5. Start the applications
+
+Use two terminals from the repository root.
+
+Terminal 1:
+
+```powershell
+npm.cmd run dev:api
+```
+
+Terminal 2:
+
+```powershell
+npm.cmd run dev:web
+```
+
+Open [http://localhost:5173](http://localhost:5173). The API is available at [http://localhost:3001](http://localhost:3001).
+
+## Local service URLs
+
+| Service           | URL                                  | Purpose                                    |
+| ----------------- | ------------------------------------ | ------------------------------------------ |
+| Web app           | <http://localhost:5173>              | Host and booker experience                 |
+| API health check  | <http://localhost:3001/health>       | Confirms the API is responding             |
+| API documentation | <http://localhost:3001/docs>         | Interactive Swagger documentation          |
+| OpenAPI document  | <http://localhost:3001/openapi.json> | Machine-readable API definition            |
+| Metrics           | <http://localhost:3001/metrics>      | Prototype product and availability metrics |
+
+## Run the Flutter mobile app
+
+Start PostgreSQL, Redis, and the API first. Then run:
+
+```powershell
+Set-Location mobile
+flutter pub get
+flutter run --dart-define=API_URL=http://YOUR_COMPUTER_LAN_IP:3001
+```
+
+Replace `YOUR_COMPUTER_LAN_IP` with your development machine's LAN address, for example `192.168.1.25`. A physical device cannot reach its host through `localhost`.
+
+For an Android emulator, the default API URL is `http://10.0.2.2:3001`, so this is usually enough:
+
+```powershell
+flutter run
+```
+
+For iOS Simulator, pass `http://localhost:3001` explicitly:
+
+```powershell
+flutter run --dart-define=API_URL=http://localhost:3001
+```
+
+## Commands
+
+Run these from the repository root unless stated otherwise.
+
+| Command                    | Description                                                        |
+| -------------------------- | ------------------------------------------------------------------ |
+| `npm.cmd run dev:api`      | Start the API in watch mode on port 3001                           |
+| `npm.cmd run dev:web`      | Start Vite on port 5173                                            |
+| `npm.cmd run db:seed`      | Reset application data and create demo data                        |
+| `npm.cmd run build`        | Build the API and web app                                          |
+| `npm.cmd test`             | Run API tests; PostgreSQL must be running for the concurrency test |
+| `npm.cmd run typecheck`    | Type-check the API and web app                                     |
+| `npm.cmd run lint`         | Run ESLint                                                         |
+| `npm.cmd run format:check` | Check formatting with Prettier                                     |
+| `npm.cmd run check`        | Run formatting, linting, type-checking, and builds                 |
+
+For Flutter:
+
+```powershell
+Set-Location mobile
+flutter analyze
+flutter test
+```
+
+## Database management
+
+The local schema is initialized from `backend/sql/001_schema.sql` only when PostgreSQL creates a new data volume. After changing that SQL and needing a clean local database, run:
+
+```powershell
+docker compose down -v
+docker compose up -d
+npm.cmd run db:seed
+```
+
+> Warning: `docker compose down -v` deletes the local PostgreSQL data volume. Do not use it if you need to retain local data.
+
+`backend/prisma/schema.prisma` defines the generated Prisma Client. Regenerate it after changing the Prisma schema:
+
+```powershell
+npm.cmd --workspace @velio/api exec prisma generate
+```
+
+## Configuration reference
+
+| Variable       | Default                                         | Description                                   |
+| -------------- | ----------------------------------------------- | --------------------------------------------- |
+| `DATABASE_URL` | `postgresql://velio:velio@localhost:5432/velio` | PostgreSQL connection string                  |
+| `REDIS_URL`    | `redis://localhost:6379`                        | Redis connection string for real-time updates |
+| `PORT`         | `3001`                                          | API HTTP and Socket.IO port                   |
+| `WEB_ORIGIN`   | `http://localhost:5173`                         | Web origin permitted by Socket.IO CORS        |
+| `NODE_ENV`     | `development`                                   | `development`, `test`, or `production`        |
+| `VITE_API_URL` | `http://localhost:3001`                         | Optional web API URL                          |
+| `API_URL`      | `http://10.0.2.2:3001`                          | Flutter compile-time API URL                  |
+
+To point the web app at another API, create `web/.env.local` with:
+
+```dotenv
+VITE_API_URL=http://localhost:3001
+```
+
+Restart Vite after changing it.
+
+## Troubleshooting
+
+- **Docker services do not start:** Make sure Docker Desktop is running, then inspect `docker compose logs postgres` and `docker compose logs redis`.
+- **The API cannot connect to PostgreSQL or Redis:** Run `docker compose ps`, verify `.env`, then restart the API.
+- **A port is already in use:** Change `PORT` or `WEB_ORIGIN` in `.env`; for Vite, update `web/vite.config.ts` or stop the process using port 5173.
+- **Schema changes do not appear:** The SQL initialization script runs only for a new PostgreSQL volume. Follow the database reset steps above.
+- **A phone cannot reach the API:** Use the computer's LAN IP in `API_URL`, ensure both devices use the same network, and allow port 3001 through the firewall.
+
+## Prototype notes
+
+PostgreSQL is the inventory source of truth. Direct bookings and invite claims lock the relevant activity row inside a transaction, preventing overselling under concurrent requests. Redis Pub/Sub distributes availability updates to Socket.IO clients, which refetch activity data before rendering it.
+
+The prototype intentionally does not include authentication, payments, transactional outbox delivery, deep-link infrastructure, or production experiment tooling. `DEMO_MODE=true` enables an in-memory UI walkthrough only; it is not transactional and must not be used to validate capacity behavior.
+
+See [PLANS.md](PLANS.md) for the intended product and technical approach, and [OWNERSHIP.md](OWNERSHIP.md) for the experiment-investigation workflow.
