@@ -1,0 +1,30 @@
+
+> dev:web
+> npm run dev --workspace @velio/web
+
+
+> dev
+> vite
+
+
+  VITE v6.4.4  ready in 714 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+4:53:27 PM [vite] (client) hmr update /src/main.tsx
+4:53:27 PM [vite] (client) hmr invalidate /src/main.tsx Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+4:53:27 PM [vite] (client) page reload src/main.tsx
+5:25:50 PM [vite] (client) hmr update /src/main.tsx
+5:25:50 PM [vite] (client) hmr update /src/styles.css
+5:25:50 PM [vite] (client) hmr invalidate /src/main.tsx Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+5:25:50 PM [vite] (client) page reload src/main.tsx
+5:28:07 PM [vite] (client) hmr update /src/main.tsx
+5:28:07 PM [vite] (client) hmr invalidate /src/main.tsx Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+5:28:07 PM [vite] (client) page reload src/main.tsx
+5:32:10 PM [vite] (client) hmr update /src/main.tsx
+5:32:10 PM [vite] (client) hmr invalidate /src/main.tsx Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+5:32:10 PM [vite] (client) page reload src/main.tsx
+6:58:28 PM [vite] (client) hmr update /src/main.tsx
+7:02:05 PM [vite] (client) hmr update /src/main.tsx
+7:02:09 PM [vite] (client) hmr update /src/main.tsx

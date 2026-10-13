@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+enum Role {
+ host
+ booker
+ guest
+}
+enum Rail {
+ vouch
+ public
+}
+enum BookingSource {
+ direct
+ invite
+}
+model User {
+ id String @id @default(uuid()) @db.Uuid
+ displayName String @map("display_name")
+ role Role @default(guest)
+ inviteGeneration Int @default(0) @map("invite_generation")
+ featureVariant String @default("treatment") @map("feature_variant")
+ firstInviterId String? @map("first_inviter_id") @db.Uuid
+ firstInviteId String? @map("first_invite_id") @db.Uuid
+ createdAt DateTime @default(now()) @map("created_at")
+ activities Activity[] @relation("host")
+ bookings Booking[]
+ plans Plan[] @relation("planOwner")
+ invites Invite[] @relation("inviter")
+ @@map("users")
+}
+model Activity {
+ id String @id @default(uuid()) @db.Uuid
+ hostId String @map("host_id") @db.Uuid
+ title String
+ description String
+ startsAt DateTime @map("starts_at")
+ priceCents Int @map("price_cents")
+ capacity Int
+ inviteFeatureEnabled Boolean @default(true) @map("invite_feature_enabled")
+ createdAt DateTime @default(now()) @map("created_at")
+ host User @relation("host", fields: [hostId], references: [id])
+ plans Plan[]
+ bookings Booking[]
+ invites Invite[]
+ receipts AvailabilityReceipt[]
+ @@map("activities")
+}
+model Plan {
+ id String @id @default(uuid()) @db.Uuid
+ activityId String @map("activity_id") @db.Uuid
+ ownerId String @map("owner_id") @db.Uuid
+ createdAt DateTime @default(now()) @map("created_at")
+ activity Activity @relation(fields: [activityId], references: [id])
+ owner User @relation("planOwner", fields: [ownerId], references: [id])
+ bookings Booking[]
+ invites Invite[]
+ @@unique([activityId, ownerId])
+ @@map("plans")
+}
+model Booking {
+ id String @id @default(uuid()) @db.Uuid
+ activityId String @map("activity_id") @db.Uuid
+ planId String @map("plan_id") @db.Uuid
+ userId String @map("user_id") @db.Uuid
+ source BookingSource
+ inviteId String? @map("invite_id") @db.Uuid
+ createdAt DateTime @default(now()) @map("created_at")
+ activity Activity @relation(fields: [activityId], references: [id])
+ plan Plan @relation(fields: [planId], references: [id])
+ user User @relation(fields: [userId], references: [id])
+ claim InviteClaim?
+ @@unique([activityId, userId])
+ @@map("bookings")
+}
+model Invite {
+ id String @id @default(uuid()) @db.Uuid
+ code String @unique
+ activityId String @map("activity_id") @db.Uuid
+ planId String @map("plan_id") @db.Uuid
+ inviterId String @map("inviter_id") @db.Uuid
+ rail Rail
+ contactName String? @map("contact_name")
+ expiresAt DateTime? @map("expires_at")
+ createdAt DateTime @default(now()) @map("created_at")
+ activity Activity @relation(fields: [activityId], references: [id])
+ plan Plan @relation(fields: [planId], references: [id])
+ inviter User @relation("inviter", fields: [inviterId], references: [id])
+ claims InviteClaim[]
+ @@map("invites")
+}
+model InviteClaim {
+ id String @id @default(uuid()) @db.Uuid
+ inviteId String @map("invite_id") @db.Uuid
+ guestId String @map("guest_id") @db.Uuid
+ bookingId String @unique @map("booking_id") @db.Uuid
+ rail Rail
+ generation Int
+ claimedAt DateTime @default(now()) @map("claimed_at")
+ invite Invite @relation(fields: [inviteId], references: [id])
+ booking Booking @relation(fields: [bookingId], references: [id])
+ @@unique([inviteId, guestId])
+ @@map("invite_claims")
+}
+model AnalyticsEvent {
+ id BigInt @id @default(autoincrement())
+ eventName String @map("event_name")
+ userId String? @map("user_id") @db.Uuid
+ activityId String? @map("activity_id") @db.Uuid
+ inviteId String? @map("invite_id") @db.Uuid
+ rail Rail?
+ payload Json @default("{}")
+ occurredAt DateTime @default(now()) @map("occurred_at")
+ @@index([eventName, occurredAt])
+ @@map("analytics_events")
+}
+model AvailabilityReceipt {
+ id String @id @default(uuid()) @db.Uuid
+ activityId String @map("activity_id") @db.Uuid
+ clientId String @map("client_id")
+ publishedAt DateTime @map("published_at")
+ receivedAt DateTime @default(now()) @map("received_at")
+ platform String
+ activity Activity @relation(fields: [activityId], references: [id])
+ @@index([activityId, receivedAt])
+ @@map("availability_receipts")
+}

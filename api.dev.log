@@ -1,0 +1,546 @@
+
+> dev:api
+> npm run dev --workspace @velio/api
+
+
+> dev
+> tsx watch src/server.ts
+
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Redis is unavailable; using in-process availability events. AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Velio API listening on 3001
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+5:32:10 PM [tsx] change in ./src\demo\in-memory-demo.ts Restarting...
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Redis is unavailable; using in-process availability events. AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Velio API listening on 3001
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+6:58:28 PM [tsx] change in ./src\app.ts Restarting...
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Redis is unavailable; using in-process availability events. AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Velio API listening on 3001
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+7:02:05 PM [tsx] change in ./src\app.ts Restarting...
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Redis is unavailable; using in-process availability events. AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Velio API listening on 3001
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+7:02:09 PM [tsx] change in ./src\app.ts Restarting...
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Redis is unavailable; using in-process availability events. AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Velio API listening on 3001
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+7:02:26 PM [tsx] change in ./src\app.ts Restarting...
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Redis is unavailable; using in-process availability events. AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Velio API listening on 3001
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+7:03:55 PM [tsx] change in ./src\app.ts Restarting...
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Redis is unavailable; using in-process availability events. AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
+Velio API listening on 3001
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 6379
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:6379
+        at createConnectionError (node:net:1675:14)
+        at afterConnectMultiple (node:net:1705:16) {
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 6379
+    }
+  ]
+}
